@@ -104,36 +104,36 @@ async function startBot() {
                 case "p":
                     await delay(2000);
                     await sock.sendPresenceUpdate("available", from);
-		    await sock.readMessages([ msg.key ]);
-		    await sock.sendPresenceUpdate("composing", from);    
-		    await delay(3000);   
-	            await sock.sendPresenceUpdate("paused", from);
+		            await sock.readMessages([ msg.key ]);
+		            await sock.sendPresenceUpdate("composing", from);    
+		            await delay(3000);   
+	                await sock.sendPresenceUpdate("paused", from);
                     await sock.sendMessage(from, {text: "ping"})
-		    await sock.sendPresenceUpdate("unavailable", from)
+		            await sock.sendPresenceUpdate("unavailable", from)
                     break
 
                 case "owner":
-		    await delay(2000);
+		            await delay(2000);
                     await sock.sendPresenceUpdate("available", from);
-	            await sock.readMessages([ msg.key ]);
+	                await sock.readMessages([ msg.key ]);
                     await sock.sendPresenceUpdate("composing", from);
-		    await delay(3000);
+		            await delay(3000);
                     await sock.sendPresenceUpdate("paused", from);
                     await sock.sendMessage(from, {text: `Owner: ${author}`})
-		    await sock.sendPresenceUpdate("unavailable", from)
+		            await sock.sendPresenceUpdate("unavailable", from)
                     break
 
                 case "menu":
                 case "m":
-		    //SOP status and delay
+		            //SOP status and delay
                     await delay(2000);
                     await sock.sendPresenceUpdate("available", from);
-		    await sock.readMessages([ msg.key ]);
-	            await sock.sendPresenceUpdate("composing", from);
-		    await delay(10000);
+		            await sock.readMessages([ msg.key ]);
+	                await sock.sendPresenceUpdate("composing", from);
+		            await delay(10000);
                     await sock.sendPresenceUpdate("paused", from);	    
                     await menu(sock, from)
-	            await sock.sendPresenceUpdate("unavailable", from);
+	                await sock.sendPresenceUpdate("unavailable", from);
                     break
 
                 case "sticker":
@@ -141,21 +141,31 @@ async function startBot() {
                 case "s":
                 case "$":
                     await sticker(sock, msg, from)
-		    await sock.sendPresenceUpdate("unavailable", from);
+		            await sock.sendPresenceUpdate("unavailable", from);
                     break
 
                 case "tiktok":
                 case "tt":
-
-                default:
-		    await delay(2000);	    
+					await delay(2000);	    
                     await sock.sendPresenceUpdate("available", from);
-	            await sock.readMessages([ msg.key ]);
-	            await sock.sendPresenceUpdate("composing", from);
-	            await delay(4000)
-		    await sock.sendPresenceUpdate("paused", from);	    
-                    await sock.sendMessage(from, {text: "Perintah tidak dikenali ketik *.menu*" })
-	            await sock.sendPresenceUpdate("unavailable", from);
+	                await sock.readMessages([ msg.key ]);
+	                await sock.sendPresenceUpdate("composing", from);
+	                await delay(4000)
+		            await sock.sendPresenceUpdate("paused", from);	    
+                    await sock.sendMessage(from, {text: "Bentar bro gw download" });
+					await tiktok(sock, msg, from, query);
+                    await sock.sendPresenceUpdate("unavailable", from);
+					break
+					
+                default:
+		            await delay(2000);	    
+                    await sock.sendPresenceUpdate("available", from);
+	                await sock.readMessages([ msg.key ]);
+	                await sock.sendPresenceUpdate("composing", from);
+	                await delay(4000)
+		            await sock.sendPresenceUpdate("paused", from);	    
+                    await sock.sendMessage(from, {text: "Perintah tidak dikenali ketik *.menu*" });
+	                await sock.sendPresenceUpdate("unavailable", from);
 
             }
         } catch (err) {
