@@ -175,7 +175,7 @@ window.onload = function() {
 }
 
 function login() {
-    alert("Login dulu bang");
+    alert("Daftar dulu bang");
 }
 </script>
 
